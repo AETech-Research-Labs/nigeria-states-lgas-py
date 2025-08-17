@@ -32,3 +32,8 @@ def search_lga(lga_name):
             results.append(state)
     return results
 
+def search_states(prefix):
+    """Return a list of states that match a prefix (case-insensitive)"""
+    prefix = prefix.strip().lower()
+    return [state for state in NIGERIA_DATA if state.lower().startswith(prefix)]
+

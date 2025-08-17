@@ -1,5 +1,5 @@
 import pytest
-from nigeria_states_lgas import get_states, get_lgas, get_all, search_lga
+from nigeria_states_lgas import get_states, get_lgas, get_all, search_lga, search_states
 
 def test_get_states():
     states = get_states()
@@ -35,3 +35,7 @@ def test_search_lga_case_insensitive():
 
     state_none = search_lga("nonexistentlga")
     assert state_none == []
+
+def test_search_states():
+    states = search_states("PLA")
+    assert isinstance(states, list)
