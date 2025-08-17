@@ -1,0 +1,45 @@
+name: Publish Python Package
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Trigger on version tags like v1.0.1
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip build twine
+
+      - name: Build package
+        run: python -m build
+
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          twine upload dist/*
+
+      - name: Update README badges
+        env:
+          VERSION: ${{ github.ref_name }}
+        run: |
+          echo "Updating README badge for version $VERSION"
+          sed -i "s|\!\[PyPI\](https://img.shields.io/pypi/v/nigeria-states-lgas)|![PyPI](https://img.shields.io/pypi/v/nigeria-states-lgas/$VERSION)|" README.md
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Update PyPI badge to $VERSION"
+          git push

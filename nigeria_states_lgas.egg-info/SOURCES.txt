@@ -1,6 +1,5 @@
 LICENSE
 README.md
-pyproject.toml
 setup.py
 nigeria_states_lgas/__init__.py
 nigeria_states_lgas/utils.py
