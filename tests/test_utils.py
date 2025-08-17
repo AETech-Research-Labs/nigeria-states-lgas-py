@@ -26,3 +26,12 @@ def test_search_lga():
 
     state_none = search_lga("NonexistentLGA")
     assert state_none == []
+
+
+def test_search_lga_case_insensitive():
+    state = search_lga("dala")
+    assert isinstance(state, list)
+    assert "Kano" in state or len(state) > 0
+
+    state_none = search_lga("nonexistentlga")
+    assert state_none == []
