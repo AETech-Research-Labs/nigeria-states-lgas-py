@@ -36,10 +36,15 @@ jobs:
         env:
           VERSION: ${{ github.ref_name }}
         run: |
-          echo "Updating README badge for version $VERSION"
-          sed -i "s|\!\[PyPI\](https://img.shields.io/pypi/v/nigeria-states-lgas)|![PyPI](https://img.shields.io/pypi/v/nigeria-states-lgas/$VERSION)|" README.md
+          CLEAN_VERSION=${VERSION#v}  # remove leading "v"
+          echo "Updating README badge for version $CLEAN_VERSION"
+          sed -i "s|!\[PyPI\](https://img.shields.io/pypi/v/nigeria-states-lgas).*|![PyPI](https://img.shields.io/pypi/v/nigeria-states-lgas/$CLEAN_VERSION)|" README.md
+
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git checkout main
+          git pull origin main
           git add README.md
-          git commit -m "Update PyPI badge to $VERSION"
-          git push
+          git commit -m "Update PyPI badge to $CLEAN_VERSION" || echo "No changes to commit"
+          git push origin main
