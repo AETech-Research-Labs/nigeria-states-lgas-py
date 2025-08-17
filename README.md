@@ -1,6 +1,6 @@
 ![PyPI](https://img.shields.io/pypi/v/nigeria-states-lgas)
 ![Python Versions](https://img.shields.io/pypi/pyversions/nigeria-states-lgas)
-![Python package](https://github.com/aetech-research-labs/nigeria-states-lgas-py/actions/workflows/python-tests.yml/badge.svg)
+[![Python package](https://github.com/AETech-Research-Labs/nigeria-states-lgas-py/actions/workflows/python-tests.yml/badge.svg)](https://github.com/AETech-Research-Labs/nigeria-states-lgas-py/actions/workflows/python-tests.yml)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 # Nigeria States & LGAs (Python Package)
